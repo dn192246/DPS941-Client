@@ -11,3 +11,4 @@ Christian Alexander Hernández Funes (HF171856)
 Kelvin Vladimir García Juárez (GJ111587)
 
 https://trello.com/b/Ucp3ffT6/dps941-02-2023
+Mockups: https://drive.google.com/drive/folders/1WgSpVjxDoHmZyHxkku3E8APT5BKZjK9k?usp=sharing
