@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "827625944538",
+    "project_id": "asilolaesperanza",
+    "storage_bucket": "asilolaesperanza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827625944538:android:4683069bffc551d512bce3",
+        "android_client_info": {
+          "package_name": "com.laesperanza.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp-9dyoHTakYOM_RgXLisVHtPsw2YXTGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
