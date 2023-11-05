@@ -1,30 +1,60 @@
 import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, Modal, ScrollView, Alert } from 'react-native';
 import { app, auth, db } from '../Firebase';
 import { AntDesign } from '@expo/vector-icons';
+import { doc, deleteDoc } from "firebase/firestore";
 
-function DoctorDetails({doctor}) {
+export default function DoctorDetails({ doctor }) {
+
+    const deleteDoctor = async () => {
+        // Confirmar con el usuario antes de borrar
+        Alert.alert(
+            "Eliminar Doctor",
+            "¿Estás seguro de que quieres eliminar este doctor?",
+            [
+                // Botón Cancelar
+                {
+                    text: "Cancelar",
+                    style: "cancel"
+                },
+                // Botón Confirmar
+                {
+                    text: "Sí, eliminar",
+                    onPress: async () => {
+                        try {
+                            await deleteDoc(doc(db, "Doctores", doctor.id));
+                            Alert.alert("Eliminado", "El doctor ha sido eliminado correctamente.");
+                            
+                        } catch (error) {
+                            console.error("Error al eliminar el doctor: ", error);
+                            Alert.alert("Error", "No se pudo eliminar el doctor.");
+                        }
+                    }
+                }
+            ]
+        );
+    };
+
     return (
         <View>
-            
-            <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>          
-            {doctor.imagen != null ?
-            <Image
-                resizeMode='contain'
-                style={styles.picture}
-                source={{
-                    uri: doctor.imagen,
-                }}
-            />
-            :
-            <Image
-                    resizeMode='contain'
-                    style={styles.picture}
-                    source={require('../assets/noImage.png')}
-                />
-        }
-            
+            <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+                {doctor.imagen != null ?
+                    <Image
+                        resizeMode='contain'
+                        style={styles.picture}
+                        source={{
+                            uri: doctor.imagen,
+                        }}
+                    />
+                    :
+                    <Image
+                        resizeMode='contain'
+                        style={styles.picture}
+                        source={require('../assets/noImage.png')}
+                    />
+                }
+
                 <Text style={styles.name}>{doctor.nombre}</Text>
-                <Text style={{fontSize:14, marginBottom:10}}>Médico</Text>
+                <Text style={{ fontSize: 14, marginBottom: 10 }}>Médico</Text>
                 <Text style={styles.info}>{doctor.especialidad}</Text>
                 <Text style={styles.info}>{doctor.email}</Text>
                 <Text style={styles.info}>{doctor.telefono}</Text>
@@ -34,12 +64,12 @@ function DoctorDetails({doctor}) {
                     <Text style={styles.actionsText}>Acciones</Text>
                 </View>
                 {/*Botón para eliminar*/}
-                <TouchableOpacity style={[styles.button,{backgroundColor:"#b8021d"}]}>
+                <TouchableOpacity style={[styles.button, { backgroundColor: "#b8021d" }]} onPress={deleteDoctor}>
                     <Text style={styles.buttonText}>Eliminar</Text>
                 </TouchableOpacity>
 
-                 {/*Botón para modificar*/}
-                <TouchableOpacity style={[styles.button,{backgroundColor:"#d48002"}]}>
+                {/*Botón para modificar*/}
+                <TouchableOpacity style={[styles.button, { backgroundColor: "#d48002" }]}>
                     <Text style={styles.buttonText}>Modificar</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -85,18 +115,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginVertical: 20,
     },
-    button:{
-        justifyContent:"center",
-        alignContent:'center',
-        textAlign:'center',
-        width:120,
-        height:40,
+    button: {
+        justifyContent: "center",
+        alignContent: 'center',
+        textAlign: 'center',
+        width: 120,
+        height: 40,
         marginVertical: 20
     },
-    buttonText:{
-        color:"white",
-        fontSize:16,
-        textAlign:"center",
+    buttonText: {
+        color: "white",
+        fontSize: 16,
+        textAlign: "center",
     }
 });
-export default DoctorDetails;

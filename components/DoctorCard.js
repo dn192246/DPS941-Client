@@ -85,10 +85,10 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: 'white',
-    padding: 20,
+    padding: 10,
     borderRadius: 10,
-    height: "70%",
-    width: "75%",
+    height: "90%",
+    width: "90%",
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

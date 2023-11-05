@@ -5,7 +5,6 @@ import FloatingButton from '../components/FloatingButton';
 import DoctorCard from '../components/DoctorCard';
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../Firebase";
-import DoctorDetails from '../components/DoctorDetails';
 
 export default function Doctors() {
   const [addVisible, setAddVisible] = useState(false);
@@ -45,9 +44,6 @@ export default function Doctors() {
     return () => unsubscribe();
   }, [loading]);
 
-  const handlePress = () => {
-    
-  };
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -118,8 +114,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
-    height: "75%",
-    width: "75%",
+    height: "80%",
+    width: "85%",
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -14,11 +14,32 @@ export default function AddDoctor() {
     const [fecha, setFecha] = useState('');
     const [especialidad, setEspecialidad] = useState('');
     const [imagen, setImagen] = useState(null);
-    
+    const validateEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation pattern
+        return regex.test(email);
+    };
+
+    const validatePhoneNumber = (phoneNumber) => {
+        const regex = /^\d{4}-\d{4}$/; // Matches a pattern like "1234-5678"
+        return regex.test(phoneNumber);
+    };
+
 
     const handleSubmit = async () => {
         // Verificar que hay datos en los campos para evitar enviar datos vacíos
         if (nombre && telefono && email && fecha && especialidad) {
+
+
+            if (!validateEmail(email)) {
+                Alert.alert("Advertencia", "Ingresa un correo electrónico válido.");
+                return; // Salir de la función si el email no es válido
+            }
+
+            if (!validatePhoneNumber(telefono)) {
+                Alert.alert("Advertencia", "El número de teléfono debe tener el formato ####-####.");
+                return; // Salir de la función si el teléfono no es válido
+            }
+
             setIsLoading(true);
             try {
                 let imageUrl = null;

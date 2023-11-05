@@ -17,11 +17,13 @@ export default function Patients() {
       (querySnapshot) => {
         const list = [];
         querySnapshot.forEach((doc) => {
-          const { nombre } = doc.data();
+          const { nombre, email, telefono, imagen } = doc.data();
           list.push({
             id: doc.id,
             nombre,
-            // aquí puedes agregar otros datos que necesites
+            email,
+            telefono,
+            imagen
           });
         });
 
@@ -115,8 +117,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
-    height: "75%",
-    width: "75%",
+    height: "80%",
+    width: "85%",
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
