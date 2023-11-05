@@ -19,7 +19,7 @@ export default function AddPatient() {
   };
 
   const validatePhoneNumber = (phoneNumber) => {
-    const regex = /^\d{4}-\d{4}$/; // Matches a pattern like "1234-5678"
+    const regex = /^\d{8}/;
     return regex.test(phoneNumber);
   };
 
@@ -33,7 +33,7 @@ export default function AddPatient() {
       }
 
       if (!validatePhoneNumber(telefono)) {
-        Alert.alert("Advertencia", "El número de teléfono debe tener el formato ####-####.");
+        Alert.alert("Advertencia", "El número de teléfono debe tener el formato ########.");
         return; // Salir de la función si el teléfono no es válido
       }
 
@@ -173,7 +173,7 @@ export default function AddPatient() {
         </View>
       ) : (
         <TouchableOpacity style={styles.submitButton} activeOpacity={0.75} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Agregar Doctor</Text>
+          <Text style={styles.buttonText}>Agregar Paciente</Text>
         </TouchableOpacity>
       )}
     </SafeAreaView>

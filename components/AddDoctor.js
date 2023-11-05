@@ -20,7 +20,7 @@ export default function AddDoctor() {
     };
 
     const validatePhoneNumber = (phoneNumber) => {
-        const regex = /^\d{4}-\d{4}$/; // Matches a pattern like "1234-5678"
+        const regex = /^\d{8}/; // Matches a pattern like "1234-5678"
         return regex.test(phoneNumber);
     };
 
@@ -36,7 +36,7 @@ export default function AddDoctor() {
             }
 
             if (!validatePhoneNumber(telefono)) {
-                Alert.alert("Advertencia", "El número de teléfono debe tener el formato ####-####.");
+                Alert.alert("Advertencia", "El número de teléfono debe tener el formato ########.");
                 return; // Salir de la función si el teléfono no es válido
             }
 
