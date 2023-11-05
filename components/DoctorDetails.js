@@ -2,6 +2,7 @@ import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, Modal, S
 import { app, auth, db } from '../Firebase';
 import { AntDesign } from '@expo/vector-icons';
 import { doc, deleteDoc } from "firebase/firestore";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 export default function DoctorDetails({ doctor }) {
 
@@ -21,9 +22,17 @@ export default function DoctorDetails({ doctor }) {
                     text: "Sí, eliminar",
                     onPress: async () => {
                         try {
+                            //Borrar al doctor
                             await deleteDoc(doc(db, "Doctores", doctor.id));
                             Alert.alert("Eliminado", "El doctor ha sido eliminado correctamente.");
                             
+                            //Borrar la imagen del doctor
+                            if (doctor.imagen) {
+                                const storage = getStorage(app);
+
+                                const imageRef = ref(storage, doctor.imagen);
+                                await deleteObject(imageRef);
+                            }
                         } catch (error) {
                             console.error("Error al eliminar el doctor: ", error);
                             Alert.alert("Error", "No se pudo eliminar el doctor.");
