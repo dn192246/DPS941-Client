@@ -10,7 +10,7 @@ import Profile from './screens/Profile';
 import { MaterialCommunityIcons, FontAwesome, FontAwesome5, Ionicons, Fontisto, AntDesign } from '@expo/vector-icons';
 import MenuItems from './constants/MenuItems';
 import { app, auth, db } from './Firebase';
-import DoctorDetails from './components/DoctorDetails';
+import PatientDetails from './components/PatientDetails';
 
 const Drawer = createDrawerNavigator();
 
@@ -74,7 +74,7 @@ export default function App() {
                           />
             }}
             component={
-              elemento.name === 'Inicio' ? DoctorDetails
+              elemento.name === 'Inicio' ? PatientDetails
                 : elemento.name === 'Doctores' ? Doctors
                   : elemento.name === 'Pacientes' ? Patients
                     : elemento.name === 'Administrar Citas' ? Appointments

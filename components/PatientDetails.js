@@ -2,7 +2,7 @@ import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, Modal, S
 import { app, auth, db } from '../Firebase';
 import { AntDesign } from '@expo/vector-icons';
 
-function DoctorDetails({Id}) {
+function PatientDetails({Id}) {
     return (
         <View>
             <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
@@ -21,8 +21,7 @@ function DoctorDetails({Id}) {
                     source={require('../assets/noImage.png')}
                 />
                 <Text style={styles.name}>Nombre Completo</Text>
-                <Text style={{fontSize:14, marginBottom:10}}>Médico</Text>
-                <Text style={styles.info}>Especialidad</Text>
+                <Text style={{fontSize:14, marginBottom:10}}>Paciente</Text>
                 <Text style={styles.info}>mail@mail.com</Text>
                 <Text style={styles.info}>2200-9928</Text>
                 <View style={styles.line}><Text></Text></View>
@@ -97,4 +96,4 @@ const styles = StyleSheet.create({
         textAlign:"center",
     }
 });
-export default DoctorDetails;
+export default PatientDetails;
