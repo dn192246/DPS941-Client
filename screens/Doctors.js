@@ -5,6 +5,7 @@ import FloatingButton from '../components/FloatingButton';
 import DoctorCard from '../components/DoctorCard';
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../Firebase";
+import DoctorDetails from '../components/DoctorDetails';
 
 export default function Doctors() {
   const [addVisible, setAddVisible] = useState(false);
@@ -17,11 +18,14 @@ export default function Doctors() {
       (querySnapshot) => {
         const list = [];
         querySnapshot.forEach((doc) => {
-          const { nombre, especialidad } = doc.data();
+          const { nombre, especialidad, email, telefono, imagen } = doc.data();
           list.push({
             id: doc.id,
             nombre,
-            especialidad
+            especialidad,
+            email,
+            telefono,
+            imagen
             // aquí puedes agregar otros datos que necesites
           });
         });
@@ -41,10 +45,8 @@ export default function Doctors() {
     return () => unsubscribe();
   }, [loading]);
 
-  const handlePress = (doctorId) => {
-    // Aquí manejarás el clic en cada tarjeta
-    // Por ahora, simplemente mostramos un alerta.
-    Alert.alert('Doctor seleccionado', `ID: ${doctorId}`);
+  const handlePress = () => {
+    
   };
 
   if (loading) {
@@ -55,7 +57,7 @@ export default function Doctors() {
     <View style={styles.container}>
       <ScrollView style={{ width: "100%" }} contentContainerStyle={styles.scrollViewContent}>
         {doctors.map((doctor) => (
-          <DoctorCard key={doctor.id} doctor={doctor} onPress={() => handlePress(doctor.id)} />
+          <DoctorCard key={doctor.id} doctor={doctor} />
         ))}
       </ScrollView>
       <FloatingButton onPress={() => setAddVisible(true)} />
@@ -63,7 +65,7 @@ export default function Doctors() {
       <Modal
         transparent={true}
         visible={addVisible}
-        onRequestClose={() => setAddVisible(false)} // Es buena práctica manejar el cierre del modal en Android.
+        onRequestClose={() => setAddVisible(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>

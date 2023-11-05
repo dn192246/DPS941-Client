@@ -74,7 +74,7 @@ export default function App() {
                           />
             }}
             component={
-              elemento.name === 'Inicio' ? PatientDetails
+              elemento.name === 'Inicio' ? Home
                 : elemento.name === 'Doctores' ? Doctors
                   : elemento.name === 'Pacientes' ? Patients
                     : elemento.name === 'Administrar Citas' ? Appointments

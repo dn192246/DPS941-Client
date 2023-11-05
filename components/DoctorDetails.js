@@ -1,30 +1,33 @@
-import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, Modal, ScrollView, Alert } from 'react-native';
 import { app, auth, db } from '../Firebase';
 import { AntDesign } from '@expo/vector-icons';
 
-function DoctorDetails({Id}) {
+function DoctorDetails({doctor}) {
     return (
         <View>
-            <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
-                {/*}
-                <Image
-                    resizeMode='contain'
-                    style={styles.picture}
-                    source={{
-                        uri: 'https://firebasestorage.googleapis.com/v0/b/asilolaesperanza.appspot.com/o/images%2F1698976966206-Rick?alt=media&token=191891dd-4b8f-4050-8b8a-11631c6b9a78&_gl=1*rsm9lt*_ga*MTI3Nzc5NTI3MC4xNjk4OTAyMjQw*_ga_CW55HF8NVT*MTY5OTE1NzE0My4xMC4xLjE2OTkxNTcxNTQuNDkuMC4w'
-                    }}
-                />
-                {*/}
-                <Image
+            
+            <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>          
+            {doctor.imagen != null ?
+            <Image
+                resizeMode='contain'
+                style={styles.picture}
+                source={{
+                    uri: doctor.imagen,
+                }}
+            />
+            :
+            <Image
                     resizeMode='contain'
                     style={styles.picture}
                     source={require('../assets/noImage.png')}
                 />
-                <Text style={styles.name}>Nombre Completo</Text>
+        }
+            
+                <Text style={styles.name}>{doctor.nombre}</Text>
                 <Text style={{fontSize:14, marginBottom:10}}>Médico</Text>
-                <Text style={styles.info}>Especialidad</Text>
-                <Text style={styles.info}>mail@mail.com</Text>
-                <Text style={styles.info}>2200-9928</Text>
+                <Text style={styles.info}>{doctor.especialidad}</Text>
+                <Text style={styles.info}>{doctor.email}</Text>
+                <Text style={styles.info}>{doctor.telefono}</Text>
                 <View style={styles.line}><Text></Text></View>
                 <View style={styles.actions}>
                     <AntDesign style={{ marginRight: 5 }} name="infocirlce" size={24} color="brown" />
@@ -47,7 +50,6 @@ function DoctorDetails({Id}) {
 const styles = StyleSheet.create({
     container: {
         textAlign: "center",
-        padding: 30,
         height: "90%",
     },
     line: {
