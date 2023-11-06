@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Alert, Text, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Dimensions, View, Alert, Text, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Image, ActivityIndicator } from 'react-native';
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../Firebase';
 import { storage } from '../Firebase';
@@ -180,54 +180,54 @@ export default function AddPatient() {
   );
 }
 
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
-    //justifyContent: 'center',
-    marginTop: 30,
+    justifyContent: 'center', // Centra el contenido verticalmente
+    marginTop: height * 0.05, // Margen superior en función de la altura de la pantalla
   },
   imageButtons: {
     flexDirection: "row",
     justifyContent: "space-around",
+    marginTop: height * 0.03, // Margen superior en función de la altura de la pantalla
   },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    width: '90%',
+    width: width * 0.9, // Ancho relativo al ancho de la pantalla
     borderRadius: 15,
   },
   title: {
     textAlign: "center",
     fontWeight: '800',
-    fontSize: 28,
-    marginBottom: 15,
+    fontSize: width * 0.08, // Tamaño de fuente relativo al ancho de la pantalla
+    marginBottom: height * 0.02, // Espaciado inferior en función de la altura de la pantalla
   },
   submitButton: {
     backgroundColor: "#0084ff",
-    padding: 12,
+    padding: width * 0.04, // Relleno relativo al ancho de la pantalla
     borderRadius: 10,
-  },
-  buttonText: {
-    color: "#FFFFFF",
-    fontWeight: "600",
+    marginTop: height * 0.02, // Margen superior en función de la altura de la pantalla
   },
   loadImageButton: {
     backgroundColor: "#b3b2b1",
-    padding: 8,
+    padding: width * 0.03, // Relleno relativo al ancho de la pantalla
     borderRadius: 10,
-    width: "40%",
+    width: width * 0.4, // Ancho relativo al ancho de la pantalla
     justifyContent: "center",
     alignItems: "center",
   },
   removeImageButton: {
     backgroundColor: "#b80208",
-    padding: 8,
+    padding: width * 0.03, // Relleno relativo al ancho de la pantalla
     borderRadius: 10,
+    width: width * 0.4, // Ancho relativo al ancho de la pantalla
   },
   buttonText: {
     color: "#FFFFFF",
@@ -235,3 +235,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
   }
 });
+
+export default styles;
