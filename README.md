@@ -13,8 +13,10 @@ DPS941 01T - Ciclo 02-2023
 
 -------------------------------
 **FASE I**
-- Link Manual de Usuario:
-- Link Manual Tecnico:
 - Trello: https://trello.com/b/Ucp3ffT6/dps941-02-2023
 - Mockups: https://drive.google.com/drive/folders/1WgSpVjxDoHmZyHxkku3E8APT5BKZjK9k?usp=sharing
-- Licencias Creative Commons Implementada
+---------------------------------
+**Fase II**
+- Link Manual de Usuario:
+- Link Manual Tecnico:
+- *Revisar aplicativo en Master Branch*
