@@ -27,7 +27,7 @@ export default function AddDoctor() {
 
     const handleSubmit = async () => {
         // Verificar que hay datos en los campos para evitar enviar datos vacíos
-        if (nombre && telefono && email && fecha && especialidad) {
+        if (nombre && telefono && email && especialidad) {
 
 
             if (!validateEmail(email)) {
@@ -124,26 +124,26 @@ export default function AddDoctor() {
             <ScrollView style={{ width: "100%" }}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nombre"
+                    placeholder="Nombre *"
                     value={nombre}
                     onChangeText={setNombre}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Especialidad Médica"
+                    placeholder="Especialidad Médica *"
                     value={especialidad}
                     onChangeText={setEspecialidad}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Teléfono"
+                    placeholder="Teléfono (21345678) *"
                     value={telefono}
                     onChangeText={setTelefono}
                     keyboardType="phone-pad"
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Email"
+                    placeholder="Email*"
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
