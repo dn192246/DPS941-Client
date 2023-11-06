@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Modal, TouchableOpacity, Text, ActivityIndicator, Alert, ScrollView } from 'react-native';
+import { StyleSheet, View, Modal, TouchableOpacity, Text, ActivityIndicator, TextInput, ScrollView } from 'react-native';
 import AddDoctor from '../components/AddDoctor';
 import FloatingButton from '../components/FloatingButton';
 import DoctorCard from '../components/DoctorCard';
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../Firebase";
+import SearchBox from '../components/SearchBox';
 
 export default function Doctors() {
   const [addVisible, setAddVisible] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -25,7 +27,6 @@ export default function Doctors() {
             email,
             telefono,
             imagen
-            // aquí puedes agregar otros datos que necesites
           });
         });
 
@@ -35,7 +36,6 @@ export default function Doctors() {
         }
       },
       (error) => {
-        // Manejar el error aquí
         console.error(error);
       }
     );
@@ -49,10 +49,20 @@ export default function Doctors() {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
+  const filteredDoctors = searchTerm
+    ? doctors.filter((doctor) =>
+      doctor.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    : doctors;
+    
+
   return (
     <View style={styles.container}>
+
+      <SearchBox onChangeText={setSearchTerm} searchTerm={searchTerm} />
+
       <ScrollView style={{ width: "100%" }} contentContainerStyle={styles.scrollViewContent}>
-        {doctors.map((doctor) => (
+        {filteredDoctors.map((doctor) => (
           <DoctorCard key={doctor.id} doctor={doctor} />
         ))}
       </ScrollView>
@@ -103,12 +113,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Esto oscurecerá el fondo
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   scrollViewContent: {
     // Esto centra los elementos hijos (tarjetas) dentro del ScrollView
     alignItems: 'center',
-    justifyContent: 'flex-start', // Puedes usar 'center' si también quieres centrar verticalmente
+    justifyContent: 'flex-start',
   },
   modalContent: {
     backgroundColor: 'white',
@@ -145,13 +155,13 @@ const styles = StyleSheet.create({
     // iOS Shadow
     shadowColor: "#000",
     shadowOffset: {
-      width: 0, // Puedes ajustar la anchura de la sombra
-      height: 10, // y la altura para cambiar cómo se ve la sombra
+      width: 0, //anchura de la sombra
+      height: 10, //altura de la sombra
     },
-    shadowOpacity: 0.3, // Opacidad de la sombra; 1 es totalmente opaco
+    shadowOpacity: 0.3, // Opacidad de la sombra
     shadowRadius: 5, // Radio de desenfoque de la sombra
 
     // Android Shadow
     elevation: 6, // Elevación de la sombra
-  }
+  },
 });

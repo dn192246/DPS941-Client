@@ -4,8 +4,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { doc, deleteDoc } from "firebase/firestore";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 
+// Este es un componente llamado DoctorDetails que muestra los detalles de un médico y proporciona la opción de eliminarlo.
 export default function DoctorDetails({ doctor }) {
-
+    // Función asincrónica para eliminar un médico después de que el usuario confirme.
     const deleteDoctor = async () => {
         // Confirmar con el usuario antes de borrar
         Alert.alert(
