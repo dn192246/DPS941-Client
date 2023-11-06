@@ -37,12 +37,12 @@ const PatientCard = ({ patient }) => {
 
 const styles = StyleSheet.create({
   card: {
-    width:"80%",
+    width: '80%', // Ancho relativo al contenedor
     backgroundColor: 'white',
     borderRadius: 8,
     padding: 16,
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: '10%', // Margen horizontal relativo al contenedor
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -53,19 +53,19 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   cardId: {
-    fontSize: 10,
+    fontSize: 12, // Tamaño de fuente ligeramente mayor
     color: '#A9A9A9',
   },
   cardTitle: {
     fontWeight: 'bold',
-    fontSize: 18,
-    marginTop: 4,
+    fontSize: 20, // Tamaño de fuente ligeramente mayor
+    marginTop: 8, // Espaciado superior mayor
   },
   closeButton: {
     backgroundColor: "#b30000",
-    borderRadius: 10,
-    width: 30,
-    height: 30,
+    borderRadius: 15, // Mayor tamaño de borde
+    width: 40, // Mayor tamaño del botón
+    height: 40, // Mayor tamaño del botón
     alignItems: "center",
     justifyContent: "center"
   },
@@ -76,14 +76,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Esto oscurecerá el fondo
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Oscurecerá el fondo
   },
   modalContent: {
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 10,
-    height: "90%",
-    width: "90%",
+    height: '90%', // Altura relativa al contenedor
+    width: '90%', // Ancho relativo al contenedor
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
