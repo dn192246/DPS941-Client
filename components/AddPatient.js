@@ -120,20 +120,20 @@ export default function AddPatient() {
       <ScrollView style={{ width: "100%" }}>
         <TextInput
           style={styles.input}
-          placeholder="Nombre"
+          placeholder="Nombre *"
           value={nombre}
           onChangeText={setNombre}
         />
         <TextInput
           style={styles.input}
-          placeholder="Teléfono"
+          placeholder="Teléfono (21345678) *"
           value={telefono}
           onChangeText={setTelefono}
           keyboardType="phone-pad"
         />
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="Email *"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"

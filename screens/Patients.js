@@ -5,11 +5,13 @@ import FloatingButton from '../components/FloatingButton';
 import PatientCard from '../components/PatientCard';
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../Firebase";
+import SearchBox from '../components/SearchBox';
 
 export default function Patients() {
   const [addVisible, setAddVisible] = useState(false);
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -42,21 +44,24 @@ export default function Patients() {
     return () => unsubscribe();
   }, [loading]);
 
-  const handlePress = (patientId) => {
-    // Aquí manejarás el clic en cada tarjeta
-    // Por ahora, simplemente mostramos un alerta.
-    Alert.alert('Paciente seleccionado', `ID: ${patientId}`);
-  };
-
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
+  const filteredPatients = searchTerm 
+  ? patients.filter((patient)=>
+  patient.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  :patients;
+
   return (
     <View style={styles.container}>
+
+      <SearchBox onChangeText={setSearchTerm} searchTerm={searchTerm} />
+
       <ScrollView style={{width:"100%"}} contentContainerStyle={styles.scrollViewContent}>
-        {patients.map((patient) => (
-          <PatientCard key={patient.id} patient={patient} onPress={() => handlePress(patient.id)} />
+        {filteredPatients.map((patient) => (
+          <PatientCard key={patient.id} patient={patient} />
         ))}
       </ScrollView>
       <FloatingButton onPress={() => setAddVisible(true)} />
