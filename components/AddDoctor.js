@@ -5,8 +5,8 @@ import { db } from '../Firebase';
 import { storage } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import * as ImagePicker from 'expo-image-picker';
-
-export default function AddDoctor() {//funcion default
+//funcion default
+export default function AddDoctor() {
     const [isLoading, setIsLoading] = useState(false);
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
