@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View, Modal } from 'react-native';
 
-const FloatingButton = ({ onPress }) => {
+const FloatingButton = ({ onPress }) => {//constante del bonton flotante
   return (
     <TouchableOpacity style={styles.addButton} onPress={onPress} activeOpacity={0.7}>
       <Text style={styles.buttonText}>+</Text>    
