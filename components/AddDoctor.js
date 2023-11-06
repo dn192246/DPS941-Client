@@ -190,55 +190,58 @@ export default function AddDoctor() {//funcion default
         </SafeAreaView>
     );
 }
-
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFFFFF',
-        alignItems: 'center',
-        //justifyContent: 'center',
-        marginTop: 30,
-    },
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        width: '90%',
-        borderRadius: 15,
-    },
-    title: {
-        textAlign: "center",
-        fontWeight: '800',
-        fontSize: 28,
-        marginBottom: 15,
-    },
-    submitButton: {
-        backgroundColor: "#0084ff",
-        padding: 12,
-        borderRadius: 10,
-    },
-    imageButtons: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-    },
-    loadImageButton: {
-        backgroundColor: "#b3b2b1",
-        padding: 8,
-        borderRadius: 10,
-        width: "40%",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    removeImageButton: {
-        backgroundColor: "#b80208",
-        padding: 8,
-        borderRadius: 10,
-    },
-    buttonText: {
-        color: "#FFFFFF",
-        fontWeight: "600",
-        textAlign: "center",
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center', // Agregado para centrar contenido
+    marginTop: 30,
+    padding: 10, // Agregado para espaciado uniforme
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    width: '90%',
+    borderRadius: 15,
+  },
+  title: {
+    textAlign: "center",
+    fontWeight: '800',
+    fontSize: 20, // Modificado para hacerlo más pequeño y legible
+    marginBottom: 10, // Modificado para reducir el espacio inferior
+  },
+  submitButton: {
+    backgroundColor: "#0084ff",
+    padding: 12,
+    borderRadius: 10,
+    width: '50%', // Modificado para ocupar la mitad del ancho
+    marginTop: 20, // Agregado para separar del título
+  },
+  imageButtons: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 20, // Agregado para separar del botón de envío
+  },
+  loadImageButton: {
+    backgroundColor: "#b3b2b1",
+    padding: 8,
+    borderRadius: 10,
+    width: '40%', // Modificado para ocupar el 40% del ancho
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  removeImageButton: {
+    backgroundColor: "#b80208",
+    padding: 8,
+    borderRadius: 10,
+    width: '40%', // Modificado para ocupar el 40% del ancho
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontWeight: "600",
+    textAlign: "center",
+  }
 });
