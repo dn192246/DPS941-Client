@@ -3,9 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useState } from 'react';
 import DoctorDetails from './DoctorDetails';
 
+// Este es un componente funcional llamado DoctorCard que toma un objeto "doctor" como prop.
 const DoctorCard = ({ doctor }) => {
-  const [showDetails, setShowDetails] = useState(false);
-
+// Usamos el hook de estado "useState" para manejar la visibilidad de los detalles del médico.
+const [showDetails, setShowDetails] = useState(false);
+//Listado de doctores registrados, con su respectivo ID, nombre y Especialidad
   return (
     <View style={{width:"100%", alignItems:"center", justifyContent:"center",}}>
 
@@ -36,6 +38,7 @@ const DoctorCard = ({ doctor }) => {
   );
 };
 
+    // Estilos de la tarjeta del médico.
 const styles = StyleSheet.create({
   card: {
     width: "80%",
