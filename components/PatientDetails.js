@@ -6,7 +6,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 export default function PatientDetails({ patient }) {
 
     const deletePatient = async () => {
-        // Confirmar con el usuario antes de borrar
+        // Confirma con el usuario antes de elimintar
         Alert.alert(
             "Eliminar Paciente",
             "¿Estás seguro de que quieres eliminar este paciente?",
