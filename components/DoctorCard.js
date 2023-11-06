@@ -99,5 +99,5 @@ const styles = StyleSheet.create({
     },
   }
 });
-
+//Muesta la informacion en pantalla
 export default DoctorCard;
