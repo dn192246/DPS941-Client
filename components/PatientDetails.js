@@ -62,7 +62,7 @@ export default function PatientDetails({ patient }) {
                     <Text style={styles.actionsText}>Acciones</Text>
                 </View>
                 {/*Botón para eliminar*/}
-                <TouchableOpacity style={[styles.button, { backgroundColor: "#b8021d" }]} onPress={deletePatient}>
+                <TouchableOpacity style={[styles.button, { backgroundColor: "#b8022d" }]} onPress={deletePatient}>
                     <Text style={styles.buttonText}>Eliminar</Text>
                 </TouchableOpacity>
 
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     container: {
         textAlign: "center",
         padding: 30,
-        height: "90%",
+        height: "95%",
     },
     line: {
         borderBottomColor: "rgba(0,0,0,0.3)",
