@@ -16,8 +16,7 @@ DPS941 01T - Ciclo 02-2023
 - Mockups: https://drive.google.com/drive/folders/1WgSpVjxDoHmZyHxkku3E8APT5BKZjK9k?usp=sharing
 ---------------------------------
 **Fase II**
-- Link Manual de Usuario:
-- Link Manual Tecnico:
+- Link Manual de Usuario y Tecnico:https://drive.google.com/drive/folders/1xU7WROAS8i3CFb8nezdTbtUqcFc0gzF5?usp=drive_link
 - Link al video: https://drive.google.com/file/d/1AngQmmxj6Kqn7G3sL9dqpI73YfgGHC-w/view?usp=sharing
 - *Revisar aplicativo en Master Branch*
   
