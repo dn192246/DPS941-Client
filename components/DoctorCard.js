@@ -7,7 +7,7 @@ const DoctorCard = ({ doctor }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <View style={{width:"100%", alignItems:"center", justifyContent:"center"}}>
+    <View style={{width:"100%", alignItems:"center", justifyContent:"center",}}>
 
       <TouchableOpacity style={styles.card} onPress={() => { setShowDetails(true) }} activeOpacity={0.8}>
         <Text style={styles.cardId}>ID: {doctor.id}</Text>

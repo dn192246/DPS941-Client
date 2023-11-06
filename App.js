@@ -79,7 +79,8 @@ export default function App() {
                   : elemento.name === 'Pacientes' ? Patients
                     : elemento.name === 'Administrar Citas' ? Appointments
                       : elemento.name === 'Perfil' ? Profile
-                        : History
+                        : elemento.name === 'Historial de Citas' ? History
+                        : Home
             }
           />)
         }

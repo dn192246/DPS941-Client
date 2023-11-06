@@ -119,6 +119,7 @@ export default function AddDoctor() {
     };
 
     return (
+        
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Agrega un nuevo Doctor</Text>
             <ScrollView style={{ width: "100%" }}>
