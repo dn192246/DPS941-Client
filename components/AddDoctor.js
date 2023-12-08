@@ -5,6 +5,8 @@ import { db } from '../Firebase';
 import { storage } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import * as ImagePicker from 'expo-image-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 export default function AddDoctor() {
     const [isLoading, setIsLoading] = useState(false);
@@ -18,12 +20,28 @@ export default function AddDoctor() {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation pattern
         return regex.test(email);
     };
+    const [isDatePickerVisible, setDatePickerVisibile] = useState(false);
+    const showDatePicker = () => {
+        setDatePickerVisibile(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibile(false);
+    };
 
     const validatePhoneNumber = (phoneNumber) => {
         const regex = /^\d{8}/; // Matches a pattern like "1234-5678"
         return regex.test(phoneNumber);
     };
 
+    const handleDateConfirm = (event, date) => {
+        hideDatePicker();
+        if (date) {
+            const formattedDate = date.toLocaleDateString();
+            setFecha(formattedDate);
+            setCita({ ...cita, fecha: formattedDate });
+        }
+    };
 
     const handleSubmit = async () => {
         // Verificar que hay datos en los campos para evitar enviar datos vacíos
@@ -119,7 +137,7 @@ export default function AddDoctor() {
     };
 
     return (
-        
+
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Agrega un nuevo Doctor</Text>
             <ScrollView style={{ width: "100%" }}>
@@ -149,12 +167,22 @@ export default function AddDoctor() {
                     onChangeText={setEmail}
                     keyboardType="email-address"
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Fecha de nacimiento"
-                    value={fecha}
-                    onChangeText={setFecha}
-                />
+
+                <View style={{ alignItems: "center", marginBottom: 30,}}>
+                    <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
+                        <Text style={styles.buttonText}>Seleccionar Fecha de Nacimiento</Text>
+                    </TouchableOpacity>
+                    {isDatePickerVisible && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={new Date()}
+                            mode="date"
+                            display="default"
+                            onChange={handleDateConfirm}
+                        />
+                    )}
+                    {fecha !== '' && <Text>Fecha de Nacimiento: {fecha}</Text>}
+                </View>
 
                 <View style={styles.imageButtons}>
                     <TouchableOpacity style={styles.loadImageButton} title="Toma una foto con tu cámara" onPress={openCamera}>
@@ -241,5 +269,16 @@ const styles = StyleSheet.create({
         color: "#FFFFFF",
         fontWeight: "600",
         textAlign: "center",
-    }
+    },
+    dateButton: {
+        backgroundColor: '#ffae42',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 20,
+        marginBottom: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 200,
+    },
 });
