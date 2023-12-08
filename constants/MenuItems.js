@@ -24,9 +24,4 @@ export default[
         iconType: 'FontAwesome',
         iconName: 'history',
     },
-    {
-        name: 'Perfil',
-        iconType: 'AntDesign',
-        iconName: 'user',
-    },
 ]

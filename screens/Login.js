@@ -1,49 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
-import { initializeApp } from 'firebase/app';
+import firebase, { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../Firebase';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import * as Google from "expo-auth-session/providers/google";
+import * as WebBrowser from "expo-web-browser";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential } from 'firebase/auth';
 
-const Login = () => {
+const Login = ({ navigation }) => {
+    const [userInfo, setUserInfo] = React.useState();
+    const [request, response, promptAsync] = Google.useAuthRequest({
+        iosClientId: "827625944538-i6hd36mgvann91udaqku91jren5bcold.apps.googleusercontent.com",
+        androidClientId: "827625944538-sb3ac5rrh8ber0psv2r2votco6a3thc5.apps.googleusercontent.com",
+    })
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigation = useNavigation();
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    WebBrowser.maybeCompleteAuthSession()
+
+    useEffect(() => {
+        if (response?.type === "success") {
+            const { id_token } = response.params;
+            const credential = GoogleAuthProvider.credential(id_token);
+            signInWithCredential(auth, credential)
+                .then(() => {
+                    navigation.navigate("Home");
+                })
+                .catch((error) => {
+                    console.error("Error al iniciar sesión con Google: ", error);
+                });
+        }
+    }, [response]);
 
     const handleCreateAccount = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log("Cuenta Creada")
-                const user = userCredential.user;
-                console.log(user);
+                Alert.alert("Ha creado su cuenta exitosamente. Inicie sesión para continuar.", "Puede presionar el botón de Inicio de Sesión para acceder")
+                //const user = userCredential.user;
+                //console.log(user);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 Alert.alert(error.message)
             })
     };
 
-    const handleSignIn= ()=>{
+    const handleSignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log("Sesión Iniciada")
                 const user = userCredential.user;
-                console.log(user);
+                //console.log(user);
+                setEmail('');
+                setPassword('');
                 navigation.navigate('Home');
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 Alert.alert(error.message)
+                setPassword('');
             })
     };
-
-    const handleGoogleLogin = () =>{
-
-    }
 
     return (
         <View style={styles.container}>
@@ -78,9 +101,9 @@ const Login = () => {
                 <Text style={styles.buttonText}>Registrarse</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={handleGoogleLogin}>
+            <TouchableOpacity style={styles.button} onPress={() => promptAsync()}>
                 <FontAwesome name="google" size={20} color="white" />
-                <Text style={styles.buttonText}>Iniciar con Google</Text>
+                <Text style={styles.buttonText}>Continuar con Google</Text>
             </TouchableOpacity>
         </View>
     );

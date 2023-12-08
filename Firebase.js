@@ -4,8 +4,9 @@ import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from 'firebase/storage';
 
+//iOSClient: 827625944538-i6hd36mgvann91udaqku91jren5bcold.apps.googleusercontent.com
+//AndroidClient: 827625944538-sb3ac5rrh8ber0psv2r2votco6a3thc5.apps.googleusercontent.com
 
-// Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCkkFAUciyghWr72bJjMwcRziN2uWiXAzg",
     authDomain: "asilolaesperanza.firebaseapp.com",

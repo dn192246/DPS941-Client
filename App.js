@@ -9,25 +9,20 @@ import Home from './screens/Home';
 import Patients from './screens/Patients';
 import { MaterialCommunityIcons, FontAwesome, FontAwesome5, Ionicons, Fontisto, AntDesign } from '@expo/vector-icons';
 import MenuItems from './constants/MenuItems';
-import { app, auth, db } from './Firebase';
-import PatientDetails from './components/PatientDetails';
 import Login from './screens/Login';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from './Firebase.js';
+import { useNavigation } from '@react-navigation/native';
+import LogoutDrawer from './components/LogoutDrawer';
 
 const Drawer = createDrawerNavigator();
 
 function Application() {
+
   return (
-    <NavigationContainer independent={true}>
       <Drawer.Navigator
         drawerType="front"
         initialRouteName="Inicio"
-        screenOptions={{
-          activeTintColor: '#e91e63',
-          itemStyle: { marginVertical: 10 },
-        }}
+        screenOptions={{ activeTintColor: '#e91e63', itemStyle: { marginVertical: 10 } }}
+        drawerContent={(props) => <LogoutDrawer {...props} />}
       >
 
         {
@@ -82,22 +77,21 @@ function Application() {
                 : elemento.name === 'Doctores' ? Doctors
                   : elemento.name === 'Pacientes' ? Patients
                     : elemento.name === 'Administrar Citas' ? Appointments
-                        : elemento.name === 'Historial de Citas' ? History
-                          : Home
+                      : elemento.name === 'Historial de Citas' ? History
+                        : Home
             }
           />)
         }
       </Drawer.Navigator>
-    </NavigationContainer>
   );
 }
 
 export default function App() {
   const Stack = createStackNavigator();
-  return (
 
-    <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Application} />
       </Stack.Navigator>
