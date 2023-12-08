@@ -54,8 +54,9 @@ export default function PatientDetails({ patient }) {
                 }
                 <Text style={styles.name}>{patient.nombre}</Text>
                 <Text style={{ fontSize: 14, marginBottom: 10 }}>Paciente</Text>
-                <Text style={styles.info}>{patient.email}</Text>
-                <Text style={styles.info}>{patient.telefono}</Text>
+                <Text style={styles.info}>Email: {patient.email}</Text>
+                <Text style={styles.info}>Teléfono: {patient.telefono}</Text>
+                <Text style={styles.info}>Fecha de Nacimiento: {patient.fechaNacimiento}</Text>
                 <View style={styles.line}><Text></Text></View>
                 <View style={styles.actions}>
                     <AntDesign style={{ marginRight: 5 }} name="infocirlce" size={24} color="brown" />
@@ -67,7 +68,7 @@ export default function PatientDetails({ patient }) {
                 </TouchableOpacity>
 
                 {/*Botón para modificar*/}
-                <TouchableOpacity style={[styles.button, { backgroundColor: "#d48002" }]}>
+                <TouchableOpacity style={[styles.button, { backgroundColor: "#d48002", marginBottom:60 }]}>
                     <Text style={styles.buttonText}>Modificar</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         padding: 30,
         height: "90%",
+        backgroundColor:"white"
     },
     line: {
         borderBottomColor: "rgba(0,0,0,0.3)",

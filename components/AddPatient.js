@@ -5,6 +5,7 @@ import { db } from '../Firebase';
 import { storage } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import * as ImagePicker from 'expo-image-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function AddPatient() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +13,7 @@ export default function AddPatient() {
   const [telefono, setTelefono] = useState('');
   const [email, setEmail] = useState('');
   const [fecha, setFecha] = useState('');
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
   const [imagen, setImagen] = useState(null);
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation pattern
@@ -21,6 +23,22 @@ export default function AddPatient() {
   const validatePhoneNumber = (phoneNumber) => {
     const regex = /^\d{8}/;
     return regex.test(phoneNumber);
+  };
+
+  const showDatePicker = () => {
+    setDatePickerVisible(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisible(false);
+  };
+
+  const handleDateConfirm = (event, selectedDate) => {
+    hideDatePicker();
+    if (selectedDate) {
+      const formattedDate = selectedDate.toLocaleDateString();
+      setFecha(formattedDate);
+    }
   };
 
   const handleSubmit = async () => {
@@ -138,12 +156,21 @@ export default function AddPatient() {
           onChangeText={setEmail}
           keyboardType="email-address"
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Fecha de nacimiento"
-          value={fecha}
-          onChangeText={setFecha}
-        />
+        <View style={{ alignItems: "center", marginBottom: 30 }}>
+                    <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
+                        <Text style={styles.buttonText}>Seleccionar Fecha de Nacimiento</Text>
+                    </TouchableOpacity>
+                    {isDatePickerVisible && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={new Date()}
+                            mode="date"
+                            display="default"
+                            onChange={handleDateConfirm}
+                        />
+                    )}
+                    {fecha !== '' && <Text>Fecha de Nacimiento: {fecha}</Text>}
+                </View>
         <View style={styles.imageButtons}>
           <TouchableOpacity style={styles.loadImageButton} title="Toma una foto con tu cámara" onPress={openCamera}>
             <Text style={styles.buttonText}>Tomar Foto</Text>
@@ -224,6 +251,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  dateButton: {
+    backgroundColor: '#ffae42',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 200,
+},
   removeImageButton: {
     backgroundColor: "#b80208",
     padding: 8,

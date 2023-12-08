@@ -79,7 +79,7 @@ export default function DoctorDetails({ doctor }) {
                 </TouchableOpacity>
 
                 {/*Botón para modificar*/}
-                <TouchableOpacity style={[styles.button, { backgroundColor: "#d48002" }]}>
+                <TouchableOpacity style={[styles.button, { backgroundColor: "#d48002", marginBottom:60 }]}>
                     <Text style={styles.buttonText}>Modificar</Text>
                 </TouchableOpacity>
             </ScrollView>

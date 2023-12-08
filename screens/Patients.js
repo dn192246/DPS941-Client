@@ -19,13 +19,14 @@ export default function Patients() {
       (querySnapshot) => {
         const list = [];
         querySnapshot.forEach((doc) => {
-          const { nombre, email, telefono, imagen } = doc.data();
+          const { nombre, email, telefono, imagen, fechaNacimiento } = doc.data();
           list.push({
             id: doc.id,
             nombre,
             email,
             telefono,
-            imagen
+            imagen,
+            fechaNacimiento
           });
         });
 
@@ -116,10 +117,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Esto oscurecerá el fondo
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: 'red',
     padding: 20,
     borderRadius: 10,
     height: "80%",

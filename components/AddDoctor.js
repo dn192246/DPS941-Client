@@ -13,20 +13,11 @@ export default function AddDoctor() {
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
     const [email, setEmail] = useState('');
-    const [fecha, setFecha] = useState('');
     const [especialidad, setEspecialidad] = useState('');
     const [imagen, setImagen] = useState(null);
     const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation pattern
         return regex.test(email);
-    };
-    const [isDatePickerVisible, setDatePickerVisibile] = useState(false);
-    const showDatePicker = () => {
-        setDatePickerVisibile(true);
-    };
-
-    const hideDatePicker = () => {
-        setDatePickerVisibile(false);
     };
 
     const validatePhoneNumber = (phoneNumber) => {
@@ -34,14 +25,6 @@ export default function AddDoctor() {
         return regex.test(phoneNumber);
     };
 
-    const handleDateConfirm = (event, date) => {
-        hideDatePicker();
-        if (date) {
-            const formattedDate = date.toLocaleDateString();
-            setFecha(formattedDate);
-            setCita({ ...cita, fecha: formattedDate });
-        }
-    };
 
     const handleSubmit = async () => {
         // Verificar que hay datos en los campos para evitar enviar datos vacíos
@@ -77,7 +60,6 @@ export default function AddDoctor() {
                     nombre: nombre,
                     telefono: telefono,
                     email: email,
-                    fechaNacimiento: fecha,
                     especialidad: especialidad,
                     imagen: imageUrl
                 });
@@ -89,7 +71,6 @@ export default function AddDoctor() {
                 setNombre('');
                 setTelefono('');
                 setEmail('');
-                setFecha('');
                 setEspecialidad('');
                 setImagen(null);
 
@@ -137,7 +118,6 @@ export default function AddDoctor() {
     };
 
     return (
-
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Agrega un nuevo Doctor</Text>
             <ScrollView style={{ width: "100%" }}>
@@ -167,22 +147,6 @@ export default function AddDoctor() {
                     onChangeText={setEmail}
                     keyboardType="email-address"
                 />
-
-                <View style={{ alignItems: "center", marginBottom: 30,}}>
-                    <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
-                        <Text style={styles.buttonText}>Seleccionar Fecha de Nacimiento</Text>
-                    </TouchableOpacity>
-                    {isDatePickerVisible && (
-                        <DateTimePicker
-                            testID="dateTimePicker"
-                            value={new Date()}
-                            mode="date"
-                            display="default"
-                            onChange={handleDateConfirm}
-                        />
-                    )}
-                    {fecha !== '' && <Text>Fecha de Nacimiento: {fecha}</Text>}
-                </View>
 
                 <View style={styles.imageButtons}>
                     <TouchableOpacity style={styles.loadImageButton} title="Toma una foto con tu cámara" onPress={openCamera}>
