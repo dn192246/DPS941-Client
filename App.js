@@ -11,80 +11,88 @@ import { MaterialCommunityIcons, FontAwesome, FontAwesome5, Ionicons, Fontisto, 
 import MenuItems from './constants/MenuItems';
 import { app, auth, db } from './Firebase';
 import PatientDetails from './components/PatientDetails';
+import Login from './screens/Login';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        drawerType="front"
-        initialRouteName="Inicio"
-        screenOptions={{
-          activeTintColor: '#e91e63',
-          itemStyle: { marginVertical: 10 },
-        }}
-      >
 
-        {
-          MenuItems.map(elemento => <Drawer.Screen
-            key={elemento.name}
-            name={elemento.name}
-            options={{
-              drawerIcon: ({ focused }) =>
-                elemento.iconType === 'MaterialCommunityIcons' ?
-                  <MaterialCommunityIcons
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+  return (
+    !isAuthenticated? 
+      <Login /> 
+    :  
+    <NavigationContainer>
+    <Drawer.Navigator
+      drawerType="front"
+      initialRouteName="Inicio"
+      screenOptions={{
+        activeTintColor: '#e91e63',
+        itemStyle: { marginVertical: 10 },
+      }}
+    >
+
+      {
+        MenuItems.map(elemento => <Drawer.Screen
+          key={elemento.name}
+          name={elemento.name}
+          options={{
+            drawerIcon: ({ focused }) =>
+              elemento.iconType === 'MaterialCommunityIcons' ?
+                <MaterialCommunityIcons
+                  name={elemento.iconName}
+                  size={24}
+                  color={focused ? "#d98b04" : "black"}
+                />
+                :
+                elemento.iconType === 'FontAwesome' ?
+                  <FontAwesome
                     name={elemento.iconName}
                     size={24}
                     color={focused ? "#d98b04" : "black"}
                   />
                   :
-                  elemento.iconType === 'FontAwesome' ?
-                    <FontAwesome
+                  elemento.iconType === 'Ionicons' ?
+                    <Ionicons
                       name={elemento.iconName}
                       size={24}
                       color={focused ? "#d98b04" : "black"}
                     />
                     :
-                    elemento.iconType === 'Ionicons' ?
-                      <Ionicons
+                    elemento.iconType === 'Fontisto' ?
+                      <Fontisto
                         name={elemento.iconName}
                         size={24}
                         color={focused ? "#d98b04" : "black"}
                       />
                       :
-                      elemento.iconType === 'Fontisto' ?
-                        <Fontisto
+                      elemento.iconType === 'FontAwesome5' ?
+                        <FontAwesome5
                           name={elemento.iconName}
                           size={24}
                           color={focused ? "#d98b04" : "black"}
                         />
                         :
-                        elemento.iconType === 'FontAwesome5' ?
-                          <FontAwesome5
-                            name={elemento.iconName}
-                            size={24}
-                            color={focused ? "#d98b04" : "black"}
-                          />
-                          :
-                          <AntDesign
-                            name={elemento.iconName}
-                            size={24}
-                            color={focused ? "#d98b04" : "black"}
-                          />
-            }}
-            component={
-              elemento.name === 'Inicio' ? Home
-                : elemento.name === 'Doctores' ? Doctors
-                  : elemento.name === 'Pacientes' ? Patients
-                    : elemento.name === 'Administrar Citas' ? Appointments
-                      : elemento.name === 'Perfil' ? Profile
-                        : elemento.name === 'Historial de Citas' ? History
-                        : Home
-            }
-          />)
-        }
-      </Drawer.Navigator>
-    </NavigationContainer>
+                        <AntDesign
+                          name={elemento.iconName}
+                          size={24}
+                          color={focused ? "#d98b04" : "black"}
+                        />
+          }}
+          component={
+            elemento.name === 'Inicio' ? Home
+              : elemento.name === 'Doctores' ? Doctors
+                : elemento.name === 'Pacientes' ? Patients
+                  : elemento.name === 'Administrar Citas' ? Appointments
+                    : elemento.name === 'Perfil' ? Profile
+                      : elemento.name === 'Historial de Citas' ? History
+                      : Home
+          }
+        />)
+      }
+    </Drawer.Navigator>
+  </NavigationContainer>
+    
   );
 }

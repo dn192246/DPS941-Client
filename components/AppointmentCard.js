@@ -1,39 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
-import AppointmentDetails from './AppointmentDetails';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-
-const AppointmentCard = ({ appointment }) => {
-
+const AppointmentCard = ({ appointment, onDelete }) => {
   const [showDetails, setShowDetails] = useState(false);
 
-  return (
-    <View style={{ width: "100%", alignItems: "center", justifyContent: "center", }}>
+  const handleDelete = () => {
+    Alert.alert(
+      "Confirmar eliminación",
+      "¿Estás seguro de que quieres eliminar esta cita?",
+      [
+        { text: "Cancelar", style: "cancel" },
+        { text: "Eliminar", onPress: () => onDelete(appointment.id) }
+      ]
+    );
+  };
 
-      <TouchableOpacity style={styles.card} activeOpacity={0.8}>
+  return (
+    <View style={[styles.card,{ width: "85%", alignItems: "center", justifyContent: "center", }]}>
+
+      <TouchableOpacity activeOpacity={0.8}>
         <Text style={styles.cardInfo}>Paciente: {appointment.paciente}</Text>
         <Text style={styles.cardInfo}>Doctor: {appointment.doctor}</Text>
         <Text style={styles.cardInfo}>Fecha: {appointment.fecha} - {appointment.hora}</Text>
-
       </TouchableOpacity>
 
-      <Modal
-        transparent={false}
-        visible={showDetails}
-        onRequestClose={() => setShowDetails(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <TouchableOpacity
-              onPress={() => setShowDetails(false)}
-              style={styles.closeButton}>
-              <Text style={styles.closeTag}>X</Text>
-            </TouchableOpacity>
-            <AppointmentDetails appointment={appointment} />
-          </View>
-        </View>
-      </Modal>
+      <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+        <MaterialIcons name="delete" size={24} color="red" />
+      </TouchableOpacity>
 
     </View>
   );
@@ -64,6 +59,10 @@ const styles = StyleSheet.create({
   cardSpeciality: {
     fontSize: 10,
     color: '#A9A9A9',
+  },
+  cardInfo:{
+    fontSize:15,
+    margin:5,
   },
   cardTitle: {
     fontWeight: 'bold',
