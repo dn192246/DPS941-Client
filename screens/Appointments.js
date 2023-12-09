@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Modal, TouchableOpacity, Text, ActivityIndicator, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, View, Modal, TouchableOpacity, Text, ActivityIndicator, Alert, ScrollView } from 'react-native';
 import AddAppointment from '../components/AddAppointment';
 import FloatingButton from '../components/FloatingButton';
 import { collection, getDocs, addDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
@@ -15,11 +15,12 @@ export default function Appointments() {
 
   const esFechaFutura = (fechaCita) => {
     const hoy = new Date();
+    hoy.setDate(hoy.getDate() - 1);
     hoy.setHours(0, 0, 0, 0);
-
+  
     const partesFecha = fechaCita.split("/");
     const fechaFormatoCorrecto = `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
-
+  
     const fecha = new Date(fechaFormatoCorrecto);
     return fecha >= hoy;
   };
@@ -59,7 +60,7 @@ export default function Appointments() {
       await deleteDoc(doc(db, 'Citas', appointmentId));
       Alert.alert('Cita eliminada', 'La cita ha sido eliminada correctamente');
     } catch (error) {
-      console.error('Error al eliminar la cita:', error);
+      console.error('Error al eliminar las cita:', error);
       Alert.alert('Error', 'No se pudo eliminar la cita');
     }
   };

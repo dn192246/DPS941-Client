@@ -10,7 +10,6 @@ import Patients from './screens/Patients';
 import { MaterialCommunityIcons, FontAwesome, FontAwesome5, Ionicons, Fontisto, AntDesign } from '@expo/vector-icons';
 import MenuItems from './constants/MenuItems';
 import Login from './screens/Login';
-import { useNavigation } from '@react-navigation/native';
 import LogoutDrawer from './components/LogoutDrawer';
 
 const Drawer = createDrawerNavigator();

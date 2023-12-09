@@ -1,9 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { collection, getDocs, query, where, onSnapshot } from 'firebase/firestore';
+import { db } from '../Firebase'; 
+import { format } from 'date-fns';
 
 export default function Home({ navigation }) {
+  const [patientCount, setPatientCount] = useState(0);
+  const [doctorCount, setDoctorCount] = useState(0);
+  const [appointmentCount, setAppointmentCount] = useState(0);
+
+  useEffect(() => {
+    const unsubscribeDoctors = loadDoctorCount();
+    const unsubscribePatients = loadPatientCount();
+    const unsubscribeAppointments = loadAppointmentCount();
+
+    return () => {
+        // Desuscripción al desmontar el componente
+        unsubscribeDoctors();
+        unsubscribePatients();
+        unsubscribeAppointments();
+    };
+}, []);
+
+  const loadDoctorCount = () => {
+    const unsubscribe = onSnapshot(collection(db, "Doctores"), (querySnapshot) => {
+        setDoctorCount(querySnapshot.size);
+    }, (error) => {
+        console.error("Error al obtener doctores: ", error);
+    });
+
+    return unsubscribe;
+};
+
+const loadPatientCount = () => {
+    const unsubscribe = onSnapshot(collection(db, "Pacientes"), (querySnapshot) => {
+        setPatientCount(querySnapshot.size);
+    }, (error) => {
+        console.error("Error al obtener pacientes: ", error);
+    });
+
+    return unsubscribe;
+};
+
+  const loadAppointmentCount = () => {
+    const todayFormatted = format(new Date(), 'yyyy-MM-dd');
+
+    const q = query(collection(db, "Citas"), where("fecha", ">=", todayFormatted));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        setAppointmentCount(querySnapshot.size);
+    }, (error) => {
+        console.error("Error al obtener citas: ", error);
+    });
+
+    return unsubscribe; // Devuelve la función de desuscripción
+};
+
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={styles.homeContainer}>
@@ -14,17 +67,17 @@ export default function Home({ navigation }) {
 
           <View>
             <Text style={styles.subTitle}>Pacientes Registrados en la Aplicación</Text>
-            <Text style={styles.data}>10</Text>
+            <Text style={styles.data}>{patientCount}</Text>
           </View>
 
           <View>
             <Text style={styles.subTitle}>Doctores Registrados en la Aplicación</Text>
-            <Text style={styles.data}>10</Text>
+            <Text style={styles.data}>{doctorCount}</Text>
           </View>
 
           <View>
             <Text style={styles.subTitle}>Citas Médicas Pendientes</Text>
-            <Text style={styles.data}>10</Text>
+            <Text style={styles.data}>{appointmentCount}</Text>
           </View>
 
         </View>
@@ -91,8 +144,8 @@ const styles = StyleSheet.create({
   shortcutsSection: {
     alignItems: "center",
     justifyContent: 'center',
-    flexWrap: 'wrap', // Permite que los elementos hijos se ajusten dinámicamente
-    flexDirection: 'row', // Organiza los elementos hijos en filas
+    flexWrap: 'wrap',
+    flexDirection: 'row',
     marginBottom: 20,
   },
   button: {
@@ -102,8 +155,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: "75%",
-    height: 90, 
-    marginVertical: 15, 
+    height: 90,
+    marginVertical: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,

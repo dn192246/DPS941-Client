@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Modal, TouchableOpacity, Text, ActivityIndicator, Alert, ScrollView } from 'react-native';
+import { StyleSheet, View, Modal, TouchableOpacity, Text, ActivityIndicator, ScrollView } from 'react-native';
 import AddPatient from '../components/AddPatient';
 import FloatingButton from '../components/FloatingButton';
 import PatientCard from '../components/PatientCard';
@@ -36,12 +36,9 @@ export default function Patients() {
         }
       },
       (error) => {
-        // Manejar el error aquí
         console.error(error);
       }
     );
-
-    // Esto se llama cuando el componente se desmonta, para evitar fugas de memoria
     return () => unsubscribe();
   }, [loading]);
 
@@ -70,7 +67,7 @@ export default function Patients() {
       <Modal
         transparent={true}
         visible={addVisible}
-        onRequestClose={() => setAddVisible(false)} // Es buena práctica manejar el cierre del modal en Android.
+        onRequestClose={() => setAddVisible(false)} 
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
@@ -103,9 +100,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   scrollViewContent: {
-    // Esto centra los elementos hijos (tarjetas) dentro del ScrollView
     alignItems: 'center',
-    justifyContent: 'flex-start', // Puedes usar 'center' si también quieres centrar verticalmente
+    justifyContent: 'flex-start', 
   },
   closeTag: {
     color: "#FFFFFF",
@@ -154,13 +150,13 @@ const styles = StyleSheet.create({
     // iOS Shadow
     shadowColor: "#000",
     shadowOffset: {
-      width: 0, // Puedes ajustar la anchura de la sombra
-      height: 10, // y la altura para cambiar cómo se ve la sombra
+      width: 0, 
+      height: 10, 
     },
-    shadowOpacity: 0.3, // Opacidad de la sombra; 1 es totalmente opaco
-    shadowRadius: 5, // Radio de desenfoque de la sombra
+    shadowOpacity: 0.3, 
+    shadowRadius: 5,
 
     // Android Shadow
-    elevation: 6, // Elevación de la sombra
+    elevation: 6,
   }
 });

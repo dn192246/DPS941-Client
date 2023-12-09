@@ -40,7 +40,6 @@ export default function Doctors() {
       }
     );
 
-    // Esto se llama cuando el componente se desmonta, para evitar fugas de memoria
     return () => unsubscribe();
   }, [loading]);
 
@@ -116,7 +115,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   scrollViewContent: {
-    // Esto centra los elementos hijos (tarjetas) dentro del ScrollView
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -155,13 +153,13 @@ const styles = StyleSheet.create({
     // iOS Shadow
     shadowColor: "#000",
     shadowOffset: {
-      width: 0, //anchura de la sombra
-      height: 10, //altura de la sombra
+      width: 0,
+      height: 10,
     },
-    shadowOpacity: 0.3, // Opacidad de la sombra
-    shadowRadius: 5, // Radio de desenfoque de la sombra
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
 
     // Android Shadow
-    elevation: 6, // Elevación de la sombra
+    elevation: 6,
   },
 });

@@ -1,16 +1,14 @@
 import React, { useState,useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
-import firebase, { initializeApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../Firebase';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigation } from '@react-navigation/native';
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 
 const Login = ({ navigation }) => {
-    const [userInfo, setUserInfo] = React.useState();
     const [request, response, promptAsync] = Google.useAuthRequest({
         iosClientId: "827625944538-i6hd36mgvann91udaqku91jren5bcold.apps.googleusercontent.com",
         androidClientId: "827625944538-sb3ac5rrh8ber0psv2r2votco6a3thc5.apps.googleusercontent.com",
