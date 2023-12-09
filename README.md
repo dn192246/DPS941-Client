@@ -19,4 +19,7 @@ DPS941 01T - Ciclo 02-2023
 - Link Manual de Usuario y Tecnico:https://drive.google.com/drive/folders/1xU7WROAS8i3CFb8nezdTbtUqcFc0gzF5?usp=drive_link
 - Link al video: https://drive.google.com/file/d/1AngQmmxj6Kqn7G3sL9dqpI73YfgGHC-w/view?usp=sharing
 - *Revisar aplicativo en Master Branch*
-  
+---------------------------------
+**Fase III**
+Recordatorio: La aplicación general se encuentra en la rama "Master"
+-Link al video demostrativo: https://www.youtube.com/watch?v=34OlV0cZSX4
