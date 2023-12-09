@@ -21,5 +21,5 @@ DPS941 01T - Ciclo 02-2023
 - *Revisar aplicativo en Master Branch*
 ---------------------------------
 **Fase III**
-Recordatorio: La aplicación general se encuentra en la rama "Master"
--Link al video demostrativo: https://www.youtube.com/watch?v=34OlV0cZSX4
+- Recordatorio: La aplicación general se encuentra en la rama "Master"
+- Link al video demostrativo: https://www.youtube.com/watch?v=34OlV0cZSX4
